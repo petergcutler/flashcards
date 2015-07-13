@@ -1,6 +1,6 @@
 # Flashcards
 
-## Basic Requirements:
+### Basic Requirements:
 
 Render in the browser
 Include separate HTML / CSS / JavaScript files
@@ -10,7 +10,7 @@ Deploy online, using Github Project pages.
 Use semantic markup for HTML and CSS (adhere to best practices)
 
 
-## Necessary Deliverables
+### Necessary Deliverables
 
 A hosted copy of your game or app, built by you, hosted on Github pages.
 Your HTML/CSS should pass the HTML5 Validator and CSS Validators
@@ -19,18 +19,18 @@ A link to your hosted project in the URL section of your Github repo
 A readme.md file with explanations of the technologies used, the approach taken, installation instructions, unsolved problems, etc.
 
 
-## Project Description
+### Project Description
 
 Pre-load your app with some data, and let the user flip through them quickly (back or front), and use the keyboard flip the card, and to mark whether they got it right or not. Track which cards were incorrect, and re-display them until the user gets them right!
 
-### Bonus:
+#### Bonus:
 
 Track scores over time (even if the page is reloaded)
 Include images on one or both sides of the flash card
 Let the user add flash cards (don't need to be saved across refreshes)
 
 
-## User Stories:
+### User Stories:
 
 As a user, I want to be able to be able to browse flashcards by "question" or "answer" to deepen understanding of topics.
 
