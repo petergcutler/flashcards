@@ -78,7 +78,99 @@ html {
 .header-greeting {
   font-family: 'montserrat', sans-serif;
   font-weight: 700;
-  font-size: 5em;
-  color: lightgray;
+  font-size: 2em;
+  text-align: center;
+  letter-spacing: .2em;
+  margin: 1.5em auto 0 auto;
+  color: #797575;
   padding: .25em;
+}
+
+.header-description {
+  font-family: 'montserrat', sans-serif;
+  font-weight: 400;
+  font-size: 1em;
+  text-align: center;
+  margin: 1em 15em 3em 15em;
+  color: #797575;
+  padding: .25em;
+}
+
+/* -----------------------------------*/
+/* ---        SECTION - CARDS      ---*/
+/* -----------------------------------*/
+
+
+.flashcards-front-1, .flashcards-back-1 {
+  font-family: 'montserrat', sans-serif;
+  font-weight: 400;
+  font-size: 2em;
+  text-align: center;
+  margin: 2em auto;
+  color: #3B3D40;
+  padding: .25em;
+}
+
+.flashcard-hidden {
+  visibility: hidden;
+}
+
+
+/* Correct and Incorrect */
+
+.answer-category {
+  display: 1em auto 0 auto;
+  text-align: center;
+}
+
+.answer-category li {
+  font-family: 'montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 1em;
+  list-style-type: none;
+  display: inline;
+  text-align: center;
+  padding: .25em;
+}
+
+.correct-category {
+  margin: 0 0 0 7em;
+}
+
+.incorrect-category {
+  margin: 0 7em 0 0;
+}
+
+.answer-false {
+  color: #797575;
+}
+
+.answer-true {
+  color: #3B3D40;
+}
+
+/* Toggle Cards */
+
+.toggle-card {
+  display: 1em auto;
+  text-align: center;
+}
+
+.toggle-card li {
+  font-family: 'montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 1em;
+  list-style-type: none;
+  display: inline;
+  text-align: center;
+  color: #797575;
+  padding: .25em;
+}
+
+.toggle-left {
+  margin: 0 7em 0 0;
+}
+
+.toggle-right {
+  margin: 0 0 0 7em;
 }
