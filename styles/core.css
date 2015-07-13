@@ -78,11 +78,11 @@ html {
 .header-greeting {
   font-family: 'montserrat', sans-serif;
   font-weight: 700;
-  font-size: 2em;
+  font-size: 3em;
   text-align: center;
   letter-spacing: .2em;
-  margin: 1.5em auto 0 auto;
-  color: #797575;
+  margin: .5em auto 0 auto;
+  color: lightgray;
   padding: .25em;
 }
 
@@ -91,8 +91,8 @@ html {
   font-weight: 400;
   font-size: 1em;
   text-align: center;
-  margin: 1em 15em 3em 15em;
-  color: #797575;
+  margin: 1em 10em 3em 10em;
+  color: lightgray;
   padding: .25em;
 }
 
@@ -141,22 +141,22 @@ html {
   margin: 0 7em 0 0;
 }
 
-.answer-false {
+.answer-empty {
   color: #797575;
 }
 
-.answer-true {
+.answer-full {
   color: #3B3D40;
 }
 
-/* Toggle Cards */
+/* Change Cards */
 
-.toggle-card {
+.change-card {
   display: 1em auto;
   text-align: center;
 }
 
-.toggle-card li {
+.change-card li {
   font-family: 'montserrat', sans-serif;
   font-weight: 700;
   font-size: 1em;
@@ -167,10 +167,10 @@ html {
   padding: .25em;
 }
 
-.toggle-left {
+.move-left {
   margin: 0 7em 0 0;
 }
 
-.toggle-right {
+.move-right {
   margin: 0 0 0 7em;
 }

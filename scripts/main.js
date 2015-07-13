@@ -77,68 +77,202 @@ $(document).ready(function() {
 
   console.log("ready!");
 
+// deck contains the cards in the set
+
   var deck = [
-   {front: "Giraffes are hoofed animals, of this class",
-    back: "Ungulates",
-    correct: null},
+    {front: "front of 1",
+     back: "back of 1",
+     correct: null},
 
-   {front: "Giraffes are mammals of this class, a latin word meaning -to chew over and over again-",
-    back: "ruminants",
-    correct: null},
+    {front: "front of 2",
+     back: "back of 2",
+     correct: null},
 
-   {front: "The giraffe's species name, camelopardalis, elides these two other animal names",
-    back: "Camel and leopard",
-    correct:null},
+    {front: "front of 3",
+     back: "back of 3",
+     correct: null},
 
     {front: "front of 4",
      back: "back of 4",
+     correct: null},
+
+    {front: "front of 5",
+     back: "back of 5",
      correct: null}
   ];
 
-  $(".flashcards-front-1").html(deck[0].front);
-  $(".flashcards-back-1").html(deck[0].back);
+  var i = 0;
 
-  $(".toggle-flip").click(function() {
+  $(".move-right").click(function() {
+    if (i >= (deck.length - 1)) {
+      i = 0;
+    } else {
+      i++;
+    }
+    $(".flashcards-front-1").html(deck[i].front);
+    $(".flashcards-back-1").html(deck[i].back);
+  })
+
+  $(".move-left").click(function() {
+    if (i === 0) {
+      i = 4;
+    } else {
+      i--;
+    }
+    $(".flashcards-front-1").html(deck[i].front);
+    $(".flashcards-back-1").html(deck[i].back);
+  })
+
+// Here we're displaying the initial card content from deck on page load
+
+  $(".flashcards-front-1").html(deck[i].front)
+  $(".flashcards-back-1").html(deck[i].back)
+
+// Here we're allowing the user to flip the current card
+
+  $(".flip").click(function() {
     $(".flashcards-front-1").toggleClass("flashcard-hidden")
     $(".flashcards-back-1").toggleClass("flashcard-hidden")
   })
 
-  $(".correct-category").click(function() {
-    $(this).toggleClass("answer-true")
-    $(this).toggleClass("answer-false")
-  })
+// Here we're setting up our correctness evaluation
 
   $(".incorrect-category").click(function() {
-    $(this).toggleClass("answer-true")
-    $(this).toggleClass("answer-false")
+    // set deck[i].correct to false
+    // render the current setting of deck[i].correct to both in/correct buttons
+    if (deck[i].correct === null) {
+      console.log("incorrect. status was null. switching to false")
+      deck[i].correct = false
+    } else if (deck[i].correct === false) {
+      console.log("incorrect. status was false. switching to null")
+      deck[i].correct = null
+    }
+    console.log(deck[i].correct)
+    trueOrFalse();
   })
 
-  // $(".toggle-right").click(function() {
+  $(".correct-category").click(function() {
+    // set deck[i].correct to true
+    // render the current setting of deck[i].correct to both in/correct buttons
+    if (deck[i].correct === null) {
+      console.log("correct. status was null. switching to true")
+      deck[i].correct = true;
+    } else if (deck[i].correct === true) {
+      console.log("correct. status was true. switching to null")
+      deck[i].correct = null;
+    }
+    console.log(deck[i].correct)
+    trueOrFalse();
+  })
+
+// Here we're defining the conditions for true/false responses to be displayed
+
+  function trueOrFalse() {
+    console.log("youre running trueOrFalse")
+
+    if (deck[i].correct === null) {
+      console.log("if condition met")
+
+      $(".incorrect-category").toggleClass("answer-full");
+      $(".incorrect-category").toggleClass("answer-empty");
+      $(".correct-category").toggleClass("answer-full");
+      $(".correct-category").toggleClass("answer-empty");
+
+    } else if (deck[i].correct === false) {
+      console.log("else if condition met")
+      $(".incorrect-category").toggleClass("answer-empty");
+      $(".incorrect-category").toggleClass("answer-full");
+
+    } else if (deck[i].correct === true) {
+      console.log("else if condition 2 met")
+      $(".correct-category").toggleClass("answer-empty");
+      $(".correct-category").toggleClass("answer-full");
+    }
+  }
+
+
+
+
+  })
+
+
+// Here we're listening for events to alter our content
+
+//   function listen () {
+//
+//       $(".incorrect-category").click(function() {
+//         // set deck[i].correct to false
+//         // render the current setting of deck[i].correct to both in/correct buttons
+//         deck[i].correct = false;
+//         trueOrFalse();
+//       })
+//
+//       $(".correct-category").click(function() {
+//         // set deck[i].correct to true
+//         // render the current setting of deck[i].correct to both in/correct buttons
+//         deck[i].correct = true;
+//         trueOrFalse();
+//       })
+//
+//       function trueOrFalse() {
+//         if (deck[i].correct === null) {
+//           $(".correct-category", ".incorrect-category").addClass("answer-empty");
+//         } else if (deck[i].correct === false) {
+//           $(".correct-category", ".incorrect-category").addClass("answer-empty");
+//         } else if (deck[i].correct === true) {
+//           $(".correct-category", ".incorrect-category").addClass("answer-full");
+//         }
+//       }
+//
+//       $(".move-right").click(function() {
+//         // set loop to i++
+//         // render deck[i].front to flashcards-front-1 html
+//         // render deck[i].back to flashcards-back-1 html
+//       })
+//
+//       $(".move-left").click(function() {
+//         // set loop to i--
+//         // render deck[i].front to flashcards-front-1 html
+//         // render deck[i].back to flashcards-back-1 html
+//       })
+//     }
+// });
+
+
+  // $(".correct-category").click(function() {
+  //   $(this).toggleClass("answer-true")
+  //   $(this).toggleClass("answer-false")
+  // })
+  //
+  // $(".incorrect-category").click(function() {
+  //   $(this).toggleClass("answer-true")
+  //   $(this).toggleClass("answer-false")
+  // })
+
+  // $(".move-right").click(function() {
   //   jQuery.each(deck, function(index, value) {
   //     $(".flashcards-front-1").html(value.front);
   //     $(".flashcards-back-1").html(value.back);
   //   })
   // })
   //
-  // $(".toggle-right").click(function() {
+  // $(".move-right").click(function() {
   //   jQuery.each(deck, function(index, value) {
   //     $(".flashcards-front-1").html(value.front);
   //     $(".flashcards-back-1").html(value.back);
   //   })
   // })
 
-  $(".toggle-right").click(function() {
-    for (var i = 0; i < 4; i++) {
-      $(".flashcards-front-1").html(deck[i].front);
-      $(".flashcards-back-1").html(deck[i].back);
-    }
-  })
-
-  $(".toggle-left").click(function(){
-    for (var i = 0; i <4; i--) {
-      $(".flashcards-front-1").html(deck[i].front);
-      $(".flashcards-back-1").html(deck[i].back);
-    }
-  })
-
-});
+  // $(".move-right").click(function() {
+  //   for (var i = 0; i < 5; i++) {
+  //     $(".flashcards-front-1").html(deck[i].front);
+  //     $(".flashcards-back-1").html(deck[i].back);
+  //   }
+  // })
+  //
+  // $(".move-left").click(function(){
+  //   for (var i = 0; i <5; i--) {
+  //     $(".flashcards-front-1").html(deck[i].front);
+  //     $(".flashcards-back-1").html(deck[i].back);
+  //   }
+  // })
