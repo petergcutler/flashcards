@@ -1,10 +1,6 @@
-$(document).ready(function() {
-
-  console.log("ready!");
-
-// var deck contains the cards in the set
-
-  var deck = [
+var flashcard = {
+  // flashcard.deck contains the cards in the set
+  deck: [
     {front: "front of 1",
      back: "back of 1",
      correct: null},
@@ -15,8 +11,12 @@ $(document).ready(function() {
 
     {front: "front of 3",
      back: "back of 3",
-     correct: null},
-  ];
+     correct: null}],
+  // flashcard.deckFocus, one day, will contain specially marked cards
+  deckFocus: [],
+}
+
+  console.log("ready!");
 
 // Setting the counter to first index
 
@@ -24,31 +24,31 @@ $(document).ready(function() {
 
 // Rendering the current count of i in the array on page load
 
-$(".flashcards-front-1").html(deck[i].front)
-$(".flashcards-back-1").html(deck[i].back)
+$(".flashcards-front-1").html(flashcard.deck[i].front)
+$(".flashcards-back-1").html(flashcard.deck[i].back)
 
 // Defining the functions to increase/decrease i ; move card right/left
 
   function moveRight() {
     trueOrFalse();
-    if (i >= (deck.length - 1)) {
+    if (i >= (flashcard.deck.length - 1)) {
       i = 0;
     } else {
       i++;
     }
-    $(".flashcards-front-1").html(deck[i].front);
-    $(".flashcards-back-1").html(deck[i].back);
+    $(".flashcards-front-1").html(flashcard.deck[i].front);
+    $(".flashcards-back-1").html(flashcard.deck[i].back);
   }
 
   function moveLeft() {
     trueOrFalse();
     if (i === 0) {
-      i = (deck.length - 1);
+      i = (flashcard.deck.length - 1);
     } else {
       i--;
     }
-    $(".flashcards-front-1").html(deck[i].front);
-    $(".flashcards-back-1").html(deck[i].back);
+    $(".flashcards-front-1").html(flashcard.deck[i].front);
+    $(".flashcards-back-1").html(flashcard.deck[i].back);
   }
 
 // Defining the function to handle flipping the card
@@ -64,7 +64,7 @@ $(".flashcards-back-1").html(deck[i].back)
     newfront = prompt("What do you want the front to say?");
     newback = prompt("What do you want the back to say?");
 
-    deck.push({front: newfront, back: newback, correct: null});
+    flashcard.deck.push({front: newfront, back: newback, correct: null});
     console.log(deck);
   }
 
@@ -73,26 +73,26 @@ $(".flashcards-back-1").html(deck[i].back)
   // set the true/false value of .correct
 
   function setIncorrect () {
-    if (deck[i].correct === null) {
+    if (flashcard.deck[i].correct === null) {
       console.log("Clicked incorrect. Status was null. Switching to false")
-      deck[i].correct = false;
-      } else if (deck[i].correct === false) {
+      flashcard.deck[i].correct = false;
+    } else if (flashcard.deck[i].correct === false) {
       console.log("Clicked incorrect. Status was false. Switching to null")
-      deck[i].correct = null;
+      flashcard.deck[i].correct = null;
       }
-      console.log("Status ends at: " + deck[i].correct)
+      console.log("Status ends at: " + flashcard.deck[i].correct)
       trueOrFalse();
   }
 
   function setCorrect () {
-    if (deck[i].correct === null) {
+    if (flashcard.deck[i].correct === null) {
       console.log("Clicked correct. Status was null. Switching to true")
-      deck[i].correct = true;
-      } else if (deck[i].correct === true) {
+      flashcard.deck[i].correct = true;
+      } else if (flashcard.deck[i].correct === true) {
       console.log("Clicked correct. Status was true. Switching to null")
-      deck[i].correct = null;
+      flashcard.deck[i].correct = null;
       }
-      console.log("Status ends at: " + deck[i].correct)
+      console.log("Status ends at: " + flashcard.deck[i].correct)
       trueOrFalse();
   }
 
@@ -101,25 +101,28 @@ $(".flashcards-back-1").html(deck[i].back)
   function trueOrFalse() {
     console.log("youre running trueOrFalse")
 
-    if ((deck[i].correct === null) && ($(".incorrect-category").hasClass("answer-null"))) {
+    if ((flashcard.deck[i].correct === null) && ($(".incorrect-category").hasClass("answer-null"))) {
       console.log("null and we're good to go! I'm not doing shit");
-    } else if (deck[i].correct === null) {
-      console.log("if condition met")
+
+    } else if ((flashcard.deck[i].correct === null) && ($(".incorrect-category").hasClass("answer-false")))  {
+      console.log("if condition met");
+      $(".incorrect-category").toggleClass("answer-false");
+      $(".incorrect-category").toggleClass("answer-null");
+
+    } else if ((flashcard.deck[i].correct === null) && ($(".incorrect-category").hasClass("answer-true")))  {
+        console.log("if condition met");
+        $(".incorrect-category").toggleClass("answer-true");
+        $(".incorrect-category").toggleClass("answer-null");
 
 // need a "this" statement for this...
 // otherwise I'd have to segment this massive function across both incorrect and correct.
 
-      $(".incorrect-category").toggleClass("answer-null");
-      $(".incorrect-category").toggleClass("answer-false");
-      $(".correct-category").toggleClass("answer-true");
-      $(".correct-category").toggleClass("answer-false");
-
-    } else if (deck[i].correct === false) {
+    } else if (flashcard.deck[i].correct === false) {
       console.log("else if condition met")
       $(".incorrect-category").toggleClass("answer-false");
       $(".incorrect-category").toggleClass("answer-true");
 
-    } else if (deck[i].correct === true) {
+    } else if (flashcard.deck[i].correct === true) {
       console.log("else if condition 2 met")
       $(".correct-category").toggleClass("answer-false");
       $(".correct-category").toggleClass("answer-true");
@@ -173,5 +176,3 @@ $(".flashcards-back-1").html(deck[i].back)
       setCorrect();
     }
   })
-
-})
