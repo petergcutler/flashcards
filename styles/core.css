@@ -100,7 +100,6 @@ html {
 /* ---        SECTION - CARDS      ---*/
 /* -----------------------------------*/
 
-
 .flashcards-front-1, .flashcards-back-1 {
   font-family: 'montserrat', sans-serif;
   font-weight: 400;
@@ -112,7 +111,7 @@ html {
 }
 
 .flashcard-hidden {
-  visibility: hidden;
+  display: none;
 }
 
 
@@ -141,15 +140,29 @@ html {
   margin: 0 7em 0 0;
 }
 
-.answer-empty {
+.answer-false {
   color: #797575;
 }
 
-.answer-full {
+.answer-null {
+	color: #797575;
+}
+
+.answer-true {
   color: #3B3D40;
 }
 
 /* Change Cards */
+
+.new-card {
+	font-family: 'montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 1em;
+	display: inline center;
+	text-align: center;
+	padding: 3em;
+	color: #C4C4CB;
+}
 
 .change-card {
   display: 1em auto;

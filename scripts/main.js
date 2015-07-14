@@ -16,23 +16,21 @@ $(document).ready(function() {
     {front: "front of 3",
      back: "back of 3",
      correct: null},
-
-    {front: "front of 4",
-     back: "back of 4",
-     correct: null},
-
-    {front: "front of 5",
-     back: "back of 5",
-     correct: null}
   ];
 
-// setting the counter to first index
+// Setting the counter to first index
 
   var i = 0;
 
-// the click events for increase i / move card right
+// Rendering the current count of i in the array on page load
 
-  $(".move-right").click(function() {
+$(".flashcards-front-1").html(deck[i].front)
+$(".flashcards-back-1").html(deck[i].back)
+
+// Defining the functions to increase/decrease i ; move card right/left
+
+  function moveRight() {
+    trueOrFalse();
     if (i >= (deck.length - 1)) {
       i = 0;
     } else {
@@ -40,82 +38,140 @@ $(document).ready(function() {
     }
     $(".flashcards-front-1").html(deck[i].front);
     $(".flashcards-back-1").html(deck[i].back);
-  })
+  }
 
-// the click events for decrease i / move card left
-
-  $(".move-left").click(function() {
+  function moveLeft() {
+    trueOrFalse();
     if (i === 0) {
-      i = 4;
+      i = (deck.length - 1);
     } else {
       i--;
     }
     $(".flashcards-front-1").html(deck[i].front);
     $(".flashcards-back-1").html(deck[i].back);
-  })
+  }
 
-// Here we're displaying the initial card content from deck on page load
+// Defining the function to handle flipping the card
 
-  $(".flashcards-front-1").html(deck[i].front)
-  $(".flashcards-back-1").html(deck[i].back)
-
-// Here we're allowing the user to flip the current card
-
-  $(".flip").click(function() {
+  function flipCard() {
     $(".flashcards-front-1").toggleClass("flashcard-hidden")
     $(".flashcards-back-1").toggleClass("flashcard-hidden")
-  })
+  }
 
-// Here we're setting up our correctness evaluation
+// Defining the function to create a new card
 
-  $(".incorrect-category").click(function() {
+  function newCard () {
+    newfront = prompt("What do you want the front to say?");
+    newback = prompt("What do you want the back to say?");
+
+    deck.push({front: newfront, back: newback, correct: null});
+    console.log(deck);
+  }
+
+// Defining the function to evaluate .correct settings
+
+  // set the true/false value of .correct
+
+  function setIncorrect () {
     if (deck[i].correct === null) {
       console.log("Clicked incorrect. Status was null. Switching to false")
-      deck[i].correct = false
-    } else if (deck[i].correct === false) {
+      deck[i].correct = false;
+      } else if (deck[i].correct === false) {
       console.log("Clicked incorrect. Status was false. Switching to null")
-      deck[i].correct = null
-    }
-    console.log(deck[i].correct)
-    trueOrFalse();
-  })
+      deck[i].correct = null;
+      }
+      console.log("Status ends at: " + deck[i].correct)
+      trueOrFalse();
+  }
 
-  $(".correct-category").click(function() {
-    // set deck[i].correct to true
-    // render the current setting of deck[i].correct to both in/correct buttons
+  function setCorrect () {
     if (deck[i].correct === null) {
       console.log("Clicked correct. Status was null. Switching to true")
       deck[i].correct = true;
-    } else if (deck[i].correct === true) {
+      } else if (deck[i].correct === true) {
       console.log("Clicked correct. Status was true. Switching to null")
       deck[i].correct = null;
-    }
-    console.log(deck[i].correct)
-    trueOrFalse();
-  })
+      }
+      console.log("Status ends at: " + deck[i].correct)
+      trueOrFalse();
+  }
 
-// Here we're defining the conditions for true/false responses to be displayed
+  // render correctness to css
 
   function trueOrFalse() {
     console.log("youre running trueOrFalse")
 
-    if (deck[i].correct === null) {
+    if ((deck[i].correct === null) && ($(".incorrect-category").hasClass("answer-null"))) {
+      console.log("null and we're good to go! I'm not doing shit");
+    } else if (deck[i].correct === null) {
       console.log("if condition met")
 
-      $(".incorrect-category").toggleClass("answer-full");
-      $(".incorrect-category").toggleClass("answer-empty");
-      $(".correct-category").toggleClass("answer-full");
-      $(".correct-category").toggleClass("answer-empty");
+// need a "this" statement for this...
+// otherwise I'd have to segment this massive function across both incorrect and correct.
+
+      $(".incorrect-category").toggleClass("answer-null");
+      $(".incorrect-category").toggleClass("answer-false");
+      $(".correct-category").toggleClass("answer-true");
+      $(".correct-category").toggleClass("answer-false");
 
     } else if (deck[i].correct === false) {
       console.log("else if condition met")
-      $(".incorrect-category").toggleClass("answer-empty");
-      $(".incorrect-category").toggleClass("answer-full");
+      $(".incorrect-category").toggleClass("answer-false");
+      $(".incorrect-category").toggleClass("answer-true");
 
     } else if (deck[i].correct === true) {
       console.log("else if condition 2 met")
-      $(".correct-category").toggleClass("answer-empty");
-      $(".correct-category").toggleClass("answer-full");
+      $(".correct-category").toggleClass("answer-false");
+      $(".correct-category").toggleClass("answer-true");
     }
   }
+
+// Defining listeners to trigger the functions
+
+  // on click
+  $(".move-right").click( moveRight );
+  $(".move-left").click( moveLeft );
+  $(".flip").click( flipCard );
+
+  $(".incorrect-category").click( setIncorrect );
+  $(".correct-category").click( setCorrect );
+  $(".new-card").click( newCard );
+
+  // on keypress
+  $("body").keydown(function(e) {
+    if(e.keyCode == 37) {
+      moveLeft();
+    }
+  })
+
+  $("body").keydown(function(e) {
+    if(e.keyCode == 39) {
+      moveRight();
+    }
+  })
+
+  $("body").keydown(function(e) {
+    if(e.keyCode == 38) {
+      flipCard();
+    }
+  })
+
+  $("body").keydown(function(e) {
+    if(e.keyCode == 40) {
+      flipCard();
+    }
+  })
+
+  $("body").keydown(function(e) {
+    if(e.keyCode == 191) {
+      setIncorrect();
+    }
+  })
+
+  $("body").keydown(function(e) {
+    if(e.keyCode == 222) {
+      setCorrect();
+    }
+  })
+
 })
