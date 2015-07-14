@@ -1,16 +1,16 @@
 var flashcard = {
   // flashcard.deck contains the cards in the set
   deck: [
-    {front: "front of 1",
-     back: "back of 1",
+    {front: "Welcome to your card manager.",
+     back: "I see you found the back of the card.",
      correct: null},
 
-    {front: "front of 2",
-     back: "back of 2",
+    {front: "Ah. You clicked next.",
+     back: "You knew what would happen here.",
      correct: null},
 
-    {front: "front of 3",
-     back: "back of 3",
+    {front: "Try making a new card. Nothing to see here.",
+     back: "Or here. New cards, remember?",
      correct: null}],
   // flashcard.deckFocus, one day, will contain specially marked cards
   deckFocus: [],
@@ -31,22 +31,21 @@ var flashcard = {
   listen: function() {
 
     // Rendering the cur count of i in the array on page load
-    this.els.displayFront.html(flashcard.deck[flashcard.cur].front)
-    this.els.displayBack.html(flashcard.deck[flashcard.cur].back)
+    flashcard.els.displayFront.html(flashcard.deck[flashcard.cur].front)
+    flashcard.els.displayBack.html(flashcard.deck[flashcard.cur].back)
 
     // flipping the card
     function flipTheCard() {
       flashcard.els.displayFront.toggleClass("flashcard-hidden")
       flashcard.els.displayBack.toggleClass("flashcard-hidden")
     }
-    this.els.flipCard.click( flipTheCard )
-    this.els.bigBody.keydown(function(e) {
+    flashcard.els.flipCard.click( flipTheCard )
+    flashcard.els.bigBody.keydown(function(e) {
       if(e.keyCode == 38) {
-        console.log("pressed 38")
         flipTheCard();
       }
     })
-    this.els.bigBody.keydown(function(e) {
+    flashcard.els.bigBody.keydown(function(e) {
       if(e.keyCode == 40) {
         flipTheCard();
       }
@@ -60,12 +59,133 @@ var flashcard = {
       flashcard.deck.push({front: newfront, back: newback, correct: null});
       console.log(flashcard.deck);
     }
-    this.els.mkNewCard.click( newCard );
+    flashcard.els.mkNewCard.click( newCard );
 
-    // Defining the functions to increase/decrease i ; move card right/left
-    this.els.moveToRight.click(function moveToRight() {
+    // Defining the function to render true/false/null to css
+    function trueOrFalse() {
+      console.log("youre running trueOrFalse")
 
-    })
+        if ((flashcard.deck[flashcard.cur].correct === null) && (flashcard.els.displayIncor.hasClass("answer-empty"))) {
+        console.log("doing nothing");
+      } if ((flashcard.deck[flashcard.cur].correct === null) && (flashcard.els.displayIncor.hasClass("answer-full"))) {
+        flashcard.els.displayIncor.toggleClass("answer-full");
+        flashcard.els.displayIncor.toggleClass("answer-empty");
+      } if ((flashcard.deck[flashcard.cur].correct === null) && (flashcard.els.displayCor.hasClass("answer-empty"))) {
+        console.log("doing nothing");
+      } if ((flashcard.deck[flashcard.cur].correct === null) && (flashcard.els.displayCor.hasClass("answer-full"))) {
+        flashcard.els.displayCor.toggleClass("answer-full");
+        flashcard.els.displayCor.toggleClass("answer-empty");
+
+      } if ((flashcard.deck[flashcard.cur].correct === true) && (flashcard.els.displayIncor.hasClass("answer-empty"))) {
+        console.log("doing nothing");
+      } if ((flashcard.deck[flashcard.cur].correct === true) && (flashcard.els.displayIncor.hasClass("answer-full"))) {
+        flashcard.els.displayIncor.toggleClass("answer-full");
+        flashcard.els.displayIncor.toggleClass("answer-empty");
+      } if ((flashcard.deck[flashcard.cur].correct === true) && (flashcard.els.displayCor.hasClass("answer-empty"))) {
+        flashcard.els.displayCor.toggleClass("answer-empty");
+        flashcard.els.displayCor.toggleClass("answer-full");
+      } if ((flashcard.deck[flashcard.cur].correct === true) && (flashcard.els.displayCor.hasClass("answer-full"))) {
+        console.log("doing nothing");
+
+      } if ((flashcard.deck[flashcard.cur].correct === false) && (flashcard.els.displayIncor.hasClass("answer-empty"))) {
+        flashcard.els.displayIncor.toggleClass("answer-empty");
+        flashcard.els.displayIncor.toggleClass("answer-full");
+      } if ((flashcard.deck[flashcard.cur].correct === false) && (flashcard.els.displayIncor.hasClass("answer-full"))) {
+        console.log("doing nothing");
+      } if ((flashcard.deck[flashcard.cur].correct === false) && (flashcard.els.displayCor.hasClass("answer-empty"))) {
+        console.log("doing nothing");
+      } if ((flashcard.deck[flashcard.cur].correct === false) && (flashcard.els.displayCor.hasClass("answer-full"))) {
+        flashcard.els.displayCor.toggleClass("answer-full");
+        flashcard.els.displayCor.toggleClass("answer-empty");
+      }
+    }
+
+    function setIncorrect () {
+      if (flashcard.deck[flashcard.cur].correct === null) {
+        console.log("Clicked incorrect. Status was null. Switching to false")
+        flashcard.deck[flashcard.cur].correct = false;
+      } else if (flashcard.deck[flashcard.cur].correct === false) {
+        console.log("Clicked incorrect. Status was false. Switching to null")
+        flashcard.deck[flashcard.cur].correct = null;
+      } else if (flashcard.deck[flashcard.cur].correct === true) {
+        console.log("Clicked incorrect. Status was true. Switching to false")
+        flashcard.deck[flashcard.cur].correct = false;
+      }
+      console.log("Status ends at: " + flashcard.deck[flashcard.cur].correct)
+      trueOrFalse();
+    }
+
+    function setCorrect () {
+      if (flashcard.deck[flashcard.cur].correct === null) {
+        console.log("Clicked correct. Status was null. Switching to true")
+        flashcard.deck[flashcard.cur].correct = true;
+      } else if (flashcard.deck[flashcard.cur].correct === true) {
+        console.log("Clicked correct. Status was true. Switching to null")
+        flashcard.deck[flashcard.cur].correct = null;
+      } else if (flashcard.deck[flashcard.cur].correct === false) {
+        console.log("Clicked correct. Status was false. Switching to true")
+        flashcard.deck[flashcard.cur].correct = true;
+      }
+      console.log("Status ends at: " + flashcard.deck[flashcard.cur].correct)
+      trueOrFalse();
+    }
+
+    function moveRight() {
+      if (flashcard.cur >= (flashcard.deck.length - 1)) {
+        flashcard.cur = 0;
+      } else {
+        flashcard.cur++;
+      }
+      flashcard.els.displayFront.html(flashcard.deck[flashcard.cur].front);
+      flashcard.els.displayBack.html(flashcard.deck[flashcard.cur].back);
+      trueOrFalse();
+    }
+
+    function moveLeft() {
+      if (flashcard.cur === 0) {
+        flashcard.cur = (flashcard.deck.length - 1);
+      } else {
+        flashcard.cur--;
+      }
+      flashcard.els.displayFront.html(flashcard.deck[flashcard.cur].front);
+      flashcard.els.displayBack.html(flashcard.deck[flashcard.cur].back);
+      trueOrFalse();
+    }
+
+
+    // Defining listeners to trigger the functions
+
+      // on click
+      flashcard.els.moveToRight.click( moveRight );
+      flashcard.els.moveToLeft.click( moveLeft );
+
+      flashcard.els.displayIncor.click( setIncorrect );
+      flashcard.els.displayCor.click( setCorrect );
+
+      // on keypress
+      $("body").keydown(function(e) {
+        if(e.keyCode == 37) {
+          moveLeft();
+        }
+      })
+
+      $("body").keydown(function(e) {
+        if(e.keyCode == 39) {
+          moveRight();
+        }
+      })
+
+      $("body").keydown(function(e) {
+        if(e.keyCode == 191) {
+          setIncorrect();
+        }
+      })
+
+      $("body").keydown(function(e) {
+        if(e.keyCode == 222) {
+          setCorrect();
+        }
+      })
   }
 }
 flashcard.listen();
@@ -74,119 +194,39 @@ flashcard.listen();
 
 // Defining the functions to increase/decrease i ; move card right/left
 
-  function moveRight() {
-    trueOrFalse();
-    if (flashcard.cur >= (flashcard.deck.length - 1)) {
-      flashcard.cur = 0;
-    } else {
-      flashcard.cur++;
-    }
-    flashcard.els.displayFront.html(flashcard.deck[flashcard.cur].front);
-    flashcard.els.displayBack.html(flashcard.deck[flashcard.cur].back);
-  }
 
-  function moveLeft() {
-    trueOrFalse();
-    if (flashcard.cur === 0) {
-      flashcard.cur = (flashcard.deck.length - 1);
-    } else {
-      flashcard.cur--;
-    }
-    flashcard.els.displayFront.html(flashcard.deck[flashcard.cur].front);
-    flashcard.els.displayBack.html(flashcard.deck[flashcard.cur].back);
-  }
 
 // Defining the function to evaluate .correct settings
 
   // set the true/false value of .correct
 
-  function setIncorrect () {
-    if (flashcard.deck[flashcard.cur].correct === null) {
-      console.log("Clicked incorrect. Status was null. Switching to false")
-      flashcard.deck[flashcard.cur].correct = false;
-    } else if (flashcard.deck[flashcard.cur].correct === false) {
-      console.log("Clicked incorrect. Status was false. Switching to null")
-      flashcard.deck[flashcard.cur].correct = null;
-      }
-      console.log("Status ends at: " + flashcard.deck[flashcard.cur].correct)
-      trueOrFalse();
-  }
 
-  function setCorrect () {
-    if (flashcard.deck[flashcard.cur].correct === null) {
-      console.log("Clicked correct. Status was null. Switching to true")
-      flashcard.deck[flashcard.cur].correct = true;
-      } else if (flashcard.deck[flashcard.cur].correct === true) {
-      console.log("Clicked correct. Status was true. Switching to null")
-      flashcard.deck[flashcard.cur].correct = null;
-      }
-      console.log("Status ends at: " + flashcard.deck[flashcard.cur].correct)
-      trueOrFalse();
-  }
 
   // render correctness to css
-
-  function trueOrFalse() {
-    console.log("youre running trueOrFalse")
-
-    if ((flashcard.deck[flashcard.cur].correct === null) && (flashcard.els.displayIncor.hasClass("answer-null"))) {
-      console.log("null and we're good to go! I'm not doing shit");
-
-    } else if ((flashcard.deck[flashcard.cur].correct === null) && (flashcard.els.displayIncor.hasClass("answer-false")))  {
-      console.log("if condition met");
-      flashcard.els.displayIncor.toggleClass("answer-false");
-      flashcard.els.displayIncor.toggleClass("answer-null");
-
-    } else if ((flashcard.deck[flashcard.cur].correct === null) && (flashcard.els.displayIncor.hasClass("answer-true")))  {
-        console.log("if condition met");
-        flashcard.els.displayIncor.toggleClass("answer-true");
-        flashcard.els.displayIncor.toggleClass("answer-null");
-
-// need a "this" statement for this...
-// otherwise I'd have to segment this massive function across both incorrect and correct.
-
-    } else if (flashcard.deck[flashcard.cur].correct === false) {
-      console.log("else if condition met")
-      flashcard.els.displayIncor.toggleClass("answer-false");
-      flashcard.els.displayIncor.toggleClass("answer-true");
-
-    } else if (flashcard.deck[flashcard.cur].correct === true) {
-      console.log("else if condition 2 met")
-      flashcard.els.displayCor.toggleClass("answer-false");
-      flashcard.els.displayCor.toggleClass("answer-true");
-    }
-  }
-
-// Defining listeners to trigger the functions
-
-  // on click
-  flashcard.els.moveToRight.click( moveRight );
-  flashcard.els.moveToLeft.click( moveLeft );
-
-  flashcard.els.displayIncor.click( setIncorrect );
-  flashcard.els.displayCor.click( setCorrect );
-
-  // on keypress
-  $("body").keydown(function(e) {
-    if(e.keyCode == 37) {
-      moveLeft();
-    }
-  })
-
-  $("body").keydown(function(e) {
-    if(e.keyCode == 39) {
-      moveRight();
-    }
-  })
-
-  $("body").keydown(function(e) {
-    if(e.keyCode == 191) {
-      setIncorrect();
-    }
-  })
-
-  $("body").keydown(function(e) {
-    if(e.keyCode == 222) {
-      setCorrect();
-    }
-  })
+  //
+  // function trueOrFalse() {
+  //   console.log("youre running trueOrFalse")
+  //
+  //   if (flashcard.deck[flashcard.cur].correct === null) {
+  //
+  //   } else if ((flashcard.deck[flashcard.cur].correct === null) && (flashcard.els.displayIncor.hasClass("answer-false")))  {
+  //     console.log("if condition met");
+  //     flashcard.els.displayIncor.toggleClass("answer-false");
+  //     flashcard.els.displayIncor.toggleClass("answer-null");
+  //
+  //   } else if ((flashcard.deck[flashcard.cur].correct === null) && (flashcard.els.displayIncor.hasClass("answer-true")))  {
+  //       console.log("if condition met");
+  //       flashcard.els.displayIncor.toggleClass("answer-true");
+  //       flashcard.els.displayIncor.toggleClass("answer-null");
+  //
+  //   } else if (flashcard.deck[flashcard.cur].correct === false) {
+  //     console.log("else if condition met")
+  //     flashcard.els.displayIncor.toggleClass("answer-false");
+  //     flashcard.els.displayIncor.toggleClass("answer-true");
+  //
+  //   } else if (flashcard.deck[flashcard.cur].correct === true) {
+  //     console.log("else if condition 2 met")
+  //     flashcard.els.displayCor.toggleClass("answer-false");
+  //     flashcard.els.displayCor.toggleClass("answer-true");
+  //   }
+  // }

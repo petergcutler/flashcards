@@ -140,15 +140,11 @@ html {
   margin: 0 7em 0 0;
 }
 
-.answer-false {
-  color: #797575;
-}
-
-.answer-null {
+.answer-empty {
 	color: #797575;
 }
 
-.answer-true {
+.answer-full {
   color: #3B3D40;
 }
 
