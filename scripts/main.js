@@ -2,16 +2,16 @@ var flashcard = {
 
   // flashcard.deck contains the cards in the set
   deck: [
-    {front: "f1",
-     back: "b1",
+    {front: "Welcome to your card manager",
+     back: "This is the back of your first card",
      correct: null},
 
-    {front: "f2",
-     back: "b2",
+    {front: "Here's your second card",
+     back: "You guessed it, the back of your second card",
      correct: null},
 
-    {front: "f3",
-     back: "b3",
+    {front: "The front of card three",
+     back: "the back of card 3",
      correct: null}],
 
   // flashcard.deckFocus, one day, will contain specially marked cards
@@ -34,6 +34,7 @@ var flashcard = {
     moveToRight: $(".move-right"),
     moveToLeft: $(".move-left"),
     currentFace: $(".flashcards-currentface"),
+    flashcardBlock: $(".flashcards-block-1"),
     frontFirst: $("#front_first"),
     flipCard: $(".flip"),
     bigBody: $("body"),
@@ -61,6 +62,7 @@ var flashcard = {
     }
 
     flashcard.els.flipCard.click( flipTheCard )
+    flashcard.els.flashcardBlock.click( flipTheCard )
 
     flashcard.els.bigBody.keydown(function(e) {
       if(e.keyCode == 38) {
