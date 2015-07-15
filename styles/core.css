@@ -161,6 +161,12 @@ html {
 
 #correct {
   margin: 0 0 0 20%;
+	-webkit-touch-callout: 	none;
+	-webkit-user-select: 		none;
+	-khtml-user-select: 		none;
+	-moz-user-select: 			none;
+	-ms-user-select: 				none;
+	user-select: 						none;
 }
 
 #correct:hover {
@@ -170,6 +176,12 @@ html {
 
 #incorrect {
   margin: 0 20% 0 0;
+	-webkit-touch-callout: 	none;
+	-webkit-user-select: 		none;
+	-khtml-user-select: 		none;
+	-moz-user-select: 			none;
+	-ms-user-select: 				none;
+	user-select: 						none;
 }
 
 #incorrect:hover {
@@ -208,9 +220,6 @@ html {
 .answer-full {
   color: #375D81;
 }
-
-
-
 
 /* Change Cards */
 
