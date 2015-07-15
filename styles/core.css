@@ -78,21 +78,21 @@ html {
 .header-greeting {
   font-family: 'montserrat', sans-serif;
   font-weight: 700;
-  font-size: 3em;
-  text-align: center;
+  font-size: 1.2em;
+	text-align: center;
   letter-spacing: .2em;
-  margin: .5em auto 0 auto;
-  color: lightgray;
+  margin: .6em .6em .2em .6em;
+  color: #abc8e2;
   padding: .25em;
 }
 
 .header-description {
   font-family: 'montserrat', sans-serif;
   font-weight: 400;
-  font-size: 1em;
-  text-align: center;
-  margin: 1em 10em 3em 10em;
-  color: lightgray;
+  font-size: .8em;
+	text-align: center;
+  margin: .2em 1em;
+  color: #abc8e2;
   padding: .25em;
 }
 
@@ -100,53 +100,109 @@ html {
 /* ---        SECTION - CARDS      ---*/
 /* -----------------------------------*/
 
+.flashcards-block-1 {
+	height: 20em;
+	margin: 5%;
+	display: flex;
+	flex-direction: column;
+	-webkit-box-shadow: 1px 1px 2px 2px lightgray;
+	   -moz-box-shadow: 1px 1px 2px 2px lightgray;
+		   		box-shadow: 1px 1px 2px 2px lightgray;
+}
+
 .flashcards-front-1, .flashcards-back-1 {
   font-family: 'montserrat', sans-serif;
   font-weight: 400;
   font-size: 2em;
+	flex: center;
   text-align: center;
-  margin: 2em auto;
-  color: #3B3D40;
-  padding: .25em;
+  margin: auto;
+  color: #375d81;
+}
+
+.flashcards-currentface {
+	font-family: 'montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 1em;
+	color: #abc8e2;
+	flex: center;
+	text-align: right;
+	flex-basis: .0;
+	position: relative; top: 30px; left: -40px;
 }
 
 .flashcard-hidden {
   display: none;
 }
 
-
 /* Correct and Incorrect */
 
 .answer-category {
-  display: 1em auto 0 auto;
   text-align: center;
+	padding: 5% 0 0 0;
+	margin: 0 5%;
 }
 
 .answer-category li {
   font-family: 'montserrat', sans-serif;
   font-weight: 700;
-  font-size: 1em;
+  font-size: 1.4em;
   list-style-type: none;
   display: inline;
   text-align: center;
   padding: .25em;
 }
 
-.correct-category {
-  margin: 0 0 0 7em;
+#correct {
+  margin: 0 0 0 20%;
 }
 
-.incorrect-category {
-  margin: 0 7em 0 0;
+#correct:hover {
+	color: #abc8e2;
+}
+
+#incorrect {
+  margin: 0 20% 0 0;
+}
+
+#incorrect:hover {
+	color: #abc8e2;
+}
+
+#incorrect.answer-true {
+	color: #D5DAED;
+}
+
+#incorrect.answer-false {
+	color: #3B3D40;
+}
+
+#incorrect.answer-null {
+	color: #D5DAED;
+}
+
+#correct.answer-true {
+	color: #3B3D40;
+}
+
+#correct.answer-false {
+	color: #D5DAED;
+}
+
+#correct.answer-null {
+	color: #D5DAED;
 }
 
 .answer-empty {
-	color: #797575;
+	color: #D5DAED;
 }
 
 .answer-full {
   color: #3B3D40;
 }
+
+
+
 
 /* Change Cards */
 
@@ -156,30 +212,49 @@ html {
   font-size: 1em;
 	display: inline center;
 	text-align: center;
-	padding: 3em;
+	margin: 5% 25% 5% 25%;
 	color: #C4C4CB;
 }
 
 .change-card {
-  display: 1em auto;
   text-align: center;
+	margin: 0 4em;
 }
 
 .change-card li {
   font-family: 'montserrat', sans-serif;
   font-weight: 700;
-  font-size: 1em;
+  font-size: 1.4em;
   list-style-type: none;
   display: inline;
   text-align: center;
-  color: #797575;
+  color: #D5DAED;
   padding: .25em;
 }
 
+.special-buttons {
+  display: 1em auto;
+  text-align: center;
+}
+
+.special-buttons li {
+	font-family: 'montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 1.4em;
+	list-style-type: none;
+	display: inline;
+	text-align: center;
+	padding: .25em;
+}
+
+.displaying-front {
+	color: #375D81;
+}
+
 .move-left {
-  margin: 0 7em 0 0;
+  margin: 0 10% 0 0;
 }
 
 .move-right {
-  margin: 0 0 0 7em;
+  margin: 0 0 0 10%;
 }

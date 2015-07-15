@@ -19,11 +19,12 @@
   <section class ="flashcards-div-1">
 
     <ul class="answer-category">
-      <li class="incorrect-category answer-empty">incorrect</li>
-      <li class="correct-category answer-empty">correct</li>
+      <li id="incorrect" class="incorrect-category answer-empty">incorrect</li>
+      <li id="correct" class="correct-category answer-empty">correct</li>
     </ul>
 
     <div class ="flashcards-block-1">
+      <h2 class="flashcards-currentface"></h2>
       <h1 class="flashcards-front-1"></h1>
       <h1 class="flashcards-back-1 flashcard-hidden"></h1>
     </div>
@@ -35,6 +36,11 @@
     </ul>
 
     <p class="new-card"> - new card - </p>
+
+    <ul class="special-buttons">
+      <li id="front_first" class="displaying-front">front-first</li>
+      <li class="shuffler">shuffle</li>
+    </ul>
 
   </section>
 
